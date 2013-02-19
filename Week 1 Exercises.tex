@@ -1,0 +1,48 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+\title{Week 1 Exercises}
+\author{Carl Raymond}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+
+1.14: Follow through the steps to show that the recurrence $A_N = 1 + \frac{2}{N}\sum_{1 \le j \le N} A_{j-1}$ for $N>0$.
+
+Multiply by $N$:
+\[
+	N A_N = N + 2 \sum_{1 \le j \le N} A_{j-1}
+\]
+Subtract the equation for $N-1$:
+\[
+	NA_N - (N-1)A_{N-1} = N-(N-1) + 2A_{N-1} = 1 + 2 A_{N-1}
+\]
+\[
+	NA_N = (N+1)A_{N-1} + 1
+\]
+Divide by $N(N+1)$:
+\[
+	\frac{A_N}{N+1} = \frac{A_{N-1}}{N} + \frac{1}{N(N+1)}
+\]
+Telescope:
+\[
+	\frac{A_N}{N-1} = \frac{1}{N(N+1} + \frac{1}{(N-1)N} + \frac{1}{(N-2)(N-1)} + \dots + \frac{1}{2} = \sum_{1 \le j \le N} \frac{1}{j(j+1)}
+\]
+By partial fraction expansion, $\frac{1}{j(j+1)} = \frac{1}{j}-\frac{1}{j+1}$:
+\[
+	\frac{A_N}{N-1} = \sum_{1 \le j \le N}(\frac{1}{j} - \frac{1}{j+1})  = 1-\frac{1}{N+1}
+\]
+Finally,
+\[
+	A_N = (N+1)(1-\frac{1}{N+1}) = N
+\]
+\end{document}  
