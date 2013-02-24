@@ -35,11 +35,11 @@ Divide by $N(N+1)$:
 \]
 Telescope:
 \[
-	\frac{A_N}{N-1} = \frac{1}{N(N+1} + \frac{1}{(N-1)N} + \frac{1}{(N-2)(N-1)} + \dots + \frac{1}{2} = \sum_{1 \le j \le N} \frac{1}{j(j+1)}
+	\frac{A_N}{(N+1)} = \frac{1}{N(N+1)} + \frac{1}{(N-1)N} + \frac{1}{(N-2)(N-1)} + \dots + \frac{1}{2} = \sum_{1 \le j \le N} \frac{1}{j(j+1)}
 \]
 By partial fraction expansion, $\frac{1}{j(j+1)} = \frac{1}{j}-\frac{1}{j+1}$:
 \[
-	\frac{A_N}{N-1} = \sum_{1 \le j \le N}(\frac{1}{j} - \frac{1}{j+1})  = 1-\frac{1}{N+1}
+	\frac{A_N}{N+1} = \sum_{1 \le j \le N}(\frac{1}{j} - \frac{1}{j+1})  = 1-\frac{1}{N+1}
 \]
 Finally,
 \[
