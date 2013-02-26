@@ -78,9 +78,9 @@ From inspection, the coefficients of $p$ and $q$ are as above; the coefficient o
 \]
 
 The coefficients of $F_{n-1}$ and $F_n$ are established above.  For the coefficient of $r$ the proof is by induction. Let $R_n$ be the coefficient
-of $r$ in $a_n$. Then assume $R_{n-1} = \sum_{0 \le k < n-1} F_k$ and $R_{n-2} = \sum_{0 \le k < n-2} F_k$.
+of $r$ in $a_n$. Then assume $R_{n-1} = \sum_{0 \le k < n-1} F_k$ and $R_{n-2} = \sum_{0 \le k < n-2} F_k$. This is true for $R_0$ and $R_1$.
 
-By definition of the recurrence on $a_n$, $R_n = R_{n-1} + R_{n-2} + 1$:
+By definition of the recurrence on $a_n$, $R_n = R_{n-1} + R_{n-2} + 1$ for $n>1$:
 \begin{align*}
 	R_n &= F_0 + F_1 + F_2 + \cdots + F_{n-2}  \\
 		&+ \qquad  F_0 + F_1 +  \cdots + F_{n-3} +  1
@@ -125,6 +125,62 @@ Solve the recurrence
 	a_n = (n-2)a_{n-1} + 2 \quad \text{for $n>1$ with $a_1=1$.}
 \]
 
+
+\section*{Theorem 2.1}
+First-order linear recurrences. The recurrence
+\[
+	a_n = x_n a_{n-1} + y_n \quad \text{for $n>0$ with $a_0=0$}
+\]
+has the explicit solution
+\[
+	a_n = y_n + \sum_{1 \le j < n} y_j x_{j+1} x_{j+2} \cdots x_n
+\]
+
+\subsection*{Exercise 2.13}
+Solve the recurrence
+\[
+	a_n = \frac{n}{n+1} a_{n-1} + 1	\quad \text{for $n>0$ with $a_0=1$.}
+\]
+
+Define $x_j = \frac{j}{j+1}$ and $y_j=1$.
+\begin{align*}
+	a_0 &= 1 \\
+	a_1 &= x_1 a_0 + 1 \\
+	a_2 &= x_2 (x_1 a_0 + 1) + 1
+\end{align*}
+
+By Theorem 2.1,
+\begin{align*}
+	a_n &= y_n + \sum_{1\le j < n} y_j x_{j+1} x_{j+2} \cdots x_n \\
+		&= 1 + \sum_{1 \le j < n} \left(\frac{j+1}{j+2}\right) \left(\frac{j+2}{j+3}\right) \cdots \left(\frac{n}{n+1}\right) \\
+		&= 1 + \sum_{1 \le j < n} \frac{j+1}{n+1} \\
+		&= 1 + \sum_{1 < j \le n} \frac{j}{n+1} \quad \text{(adjust limits of sum)} \\
+		&= 1 + \frac{1}{n+1} \sum_{1 < j \le n} j \\
+		&= 1 + \frac{1}{n+1} \left( \frac{n(n+1)}{2} -1 \right) \\
+		&= 1 + \left( \frac{n}{2} - \frac{1}{n+1} \right)
+\end{align*}
+
+\subsection*{Exercise 2.14}
+
+
+****Write down the solution to
+\[
+	a_n = x_n a_{n-1} + y_n \quad \text{for $n>t$}
+\]
+in terms of the $x$'s, the $y$'s, and the initial value $a_t$.
+
+Define $b_n = a_{n-t}$.  Then by Theorem 2.1,
+\[
+	b_n = y_n + \sum_{1 \le j < n} y_j x_{j+1} x_{j+2} \cdots x_n
+\]
+
+
+\subsection*{Exercis 2.17}
+[Yao] (``Fringe analysis of 2-3 trees''). Solve the recurrence
+\[
+	A_N = A_{N-1} - \frac{2A_{N-1}}{N} + 2 \left( 1 - \frac{2A_{N-1}}{N} \right) \quad \text{for $N>0$ with $A_0=0$.}
+\]
+
 \section{Master Theorem for Recurrences}
 Divde-and-conquer algorithms divide a problem of size $N$ into $\alpha$ smaller problems of size $\beta$, which are solved recursively.
 The cost to do the dividing and recombining is $\Theta(n^\gamma (\log n)^\delta$).
@@ -136,7 +192,7 @@ where the sum has $\alpha$ terms is given by
 \begin{align}
 	a_n &= \Theta(n^\gamma (\log n)^\delta)         &&\text{when } \gamma < \log_\beta \alpha \\
 	a_n &=\Theta(n^\gamma (\log n)^{\delta+1})   &&\text{when } \gamma = \log_\beta \alpha \\
-	a_n &=\Theta(n^{log_\beta \alpha})                   &&\text{when } \gamma > \log_\beta \alpha
+	a_n &=\Theta(n^{log_\beta \alpha})                   &&\text{when } \gamma > \log_\beta \alpha \\
 \end{align}
 
 For Quicksort, $\alpha=2$, $\beta=2$, $\gamma=1$, $\delta=0$. Then the asymptotic cost is $\Theta(N \log N)$.
