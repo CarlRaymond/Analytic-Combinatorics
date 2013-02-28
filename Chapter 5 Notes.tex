@@ -39,9 +39,9 @@ How many bitstrings of length $N$ have no $000$?
 A bitstring with no $000$, $B_{000}$, is either empty, or 0, or 00, or it is 1 followed by some $b \in B_{000}$, or 01 followed by some  $b \in B_{000}$,
 or 001 followed by some $b \in B_{000}$.  Symbolically,
 \[
-	B(z) = \emptyset   | 0 | 00 | 1b | 01b | 001b
+	\mathcal{B} = \emptyset   + 0 + 00 + 1 \times \mathcal{B} + 01 \times \mathcal{B} + 001 \times \mathcal{B}
 \]
-The cost of a bitstring is its length, and so the generating function is $z^n$. The generating function satisfies,
+The cost of a bitstring is its length, and so the generating function is $z^n$. The generating function satisfies
 \begin{align*}
 	B(z) &= 1 + z + z^2 + zB(z) + z^2B(z) + z^3B(z) \\
 		&= \frac{1+z+z^2}{1-z-z^2-z^3}
@@ -59,7 +59,7 @@ with $\circ$, where $\left| \circ \right| = 1$. Denote an internal node with $\b
 both is $z$. The definition of a tree is that a tree is empty, or it consists of an internal node with some tree as the left child, and another tree as the right child.
 Symbolically,
 \[
-	U(z) = \circ + \bullet \times U(z) \times U(z)
+	\mathcal{U} = \circ + \bullet \times \mathcal{U} \times \mathcal{U}
 \]
 Using the generating functions for $\circ$ and $\bullet$,
 \[

@@ -14,8 +14,8 @@
 
 \begin{document}
 \maketitle
-\section{Exercies}
-\subsection{3.20}
+\section*{Exercises}
+\subsection*{Exercise 3.20}
 
 Solve the recurrence twice, with different initial conditions.
 \[
@@ -95,4 +95,74 @@ Extract coefficients for a closed for for $a_n$:
 		&= \frac{(3-n)n}{2} 
 \end{align*}
 
+\section{Derivation of Formula for Catalan Numbers}
+Catalan numbers satisfy the recurrence
+\[
+	T_N = \sum_{0 \le k < N} T_k T_{N-k-1} + \delta_{N0}
+\]
+Form the generating function by applying the definition $T(z) = \sum T_k z^k$:
+\[
+	T(z) = \sum_{N \ge 0} T_N z^N = \sum_{N \ge 0} \sum_{0 \le k < N} T_K T_{N-k-1} z^N + 1
+\]
+Change the order of summation:
+\[
+	T(z) = 1 + \sum_{k \ge 0} \sum_{N>k} T_k T_{N-k-1} z^N
+\]
+Replace $N$ by $N+k+1$ to clean up the inner summation limit: $N>k$ becomes $N+k+1 > k$ or $N+1>0$ or $N \ge 0$.
+\[
+	T(z) = 1 + \sum_{k \ge 0} \sum_{N \ge 0} T_k T_N z^{N+k+1}
+\]
+Distribute powers of $z$:
+\[
+	T(z) = 1 + z \left(\sum_{k \ge 0} T_k z^k\right) \left( \sum_{N \ge 0} T^N z^N \right) = 1 + z T^2(z)
+\]
+This is a quadratic expression in $T(z)$:
+\[
+	zT^2(z) - T(z) + 1 = 0
+\]
+Apply the quadratic formula with $a=z$, $b=-1$, $c=1$:
+\[
+	T(z) = \frac{1 \pm \sqrt{(1-4z)}}{2z}
+\]
+By initial conditions, use the negative formulation. (WHY?) Rearrange to
+\[
+	zT(z) = -\frac{1}{2}\left(\sqrt{1-4z} -1\right)
+\]
+Treat $\sqrt{1-4z}$ as a binomial expression $(a+b)^m$ with $a=1$, $b=-4z$ and $m=\frac{1}{2}$. By the binomial theorem,
+\[
+	\sqrt{1-4z} =  \sum_{N\ge0} \binom{m}{N} a^{m-N} b^N =  \sum_{N\ge0} \binom{\frac{1}{2}}{N} 1^{(\frac{1}{2}-N)} (-4z)^N = 1+ \sum_{N>0} \binom{\frac{1}{2}}{N} (-4)^N z^N
+\]
+\[
+	zT(z) = -\frac{1}{2}\sum_{N>0} \binom{\frac{1}{2}}{N} (-4)^N z^N
+\]
+Equate coefficients of the polynomials:
+\[
+	\left[ z^N \right] zT(z) = T_{N-1} = \frac{1}{2} \binom{\frac{1}{2}}{N} (-4)^N
+\]
+or
+\[
+	T_N = -\frac{1}{2} \binom{\frac{1}{2}}{N+1} (-4)^{N+1}
+\]
+By the falling factorial definition of a binomial coefficient,
+\[
+	T_N = -\frac{1}{2} \frac{(\frac{1}{2})(\frac{1}{2}-1)(\frac{1}{2}-2)(\frac{1}{2}-3)\cdots(\frac{1}{2}-N)}{(N+1)!} (-4)^{N+1}
+\]
+where the numerator has $N+1$ factors in the product.  Multiply all but the first of those factor by -2:
+\[
+	T_N = -\frac{1}{2} \frac{(\frac{1}{2})1 \cdot 3 \cdot 5 \cdots (2N-1)}{(N+1)!} 2^N (-4)
+\]
+Cancel the $-4$ and the $\frac{1}{2}$ and $-\frac{1}{2}$, leaving $N$ factors in the numerator
+\[
+	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1) }{(N+1)!} 2^N
+\]
+Add in the missing even terms in numerator and denominator:
+\[
+	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1) }{(N+1)!} \frac{2 \cdot 4 \cdot 6 \cdots 2N}{2 \cdot 4 \cdot 6 \cdots 2N} 2^N
+\]
+Cancel the remaining powers of 2:
+\begin{align*}
+	T_N &= \frac{1 \cdot 3 \cdot 5 \cdots (2N-1)}{(N+1)!}  \frac{2 \cdot 4 \cdot 6 \cdots 2N}{1 \cdot 3 \cdot 5 \cdots N} \\
+		&= \frac{1}{N+1} \frac{(2N)!}{N! N!} \\
+		&= \frac{1}{N+1} \binom{2N}{N}
+\end{align*}
 \end{document}  
