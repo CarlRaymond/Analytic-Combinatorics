@@ -96,11 +96,11 @@ Extract coefficients for a closed for for $a_n$:
 \end{align*}
 
 \section{Derivation of Formula for Catalan Numbers}
-Catalan numbers satisfy the recurrence
+Catalan numbers, $T_0=1, T_1=1, T_2=2, T_3=5, T_4=14, T_5=42, \dots$, satisfy the recurrence
 \[
 	T_N = \sum_{0 \le k < N} T_k T_{N-k-1} + \delta_{N0}
 \]
-Form the generating function by applying the definition $T(z) = \sum T_k z^k$:
+Form the generating function by applying the definition $T(z) = \sum T_N z^N$:
 \[
 	T(z) = \sum_{N \ge 0} T_N z^N = \sum_{N \ge 0} \sum_{0 \le k < N} T_K T_{N-k-1} z^N + 1
 \]
@@ -130,14 +130,14 @@ By initial conditions, use the negative formulation. (WHY?) Rearrange to
 \]
 Treat $\sqrt{1-4z}$ as a binomial expression $(a+b)^m$ with $a=1$, $b=-4z$ and $m=\frac{1}{2}$. By the binomial theorem,
 \[
-	\sqrt{1-4z} =  \sum_{N\ge0} \binom{m}{N} a^{m-N} b^N =  \sum_{N\ge0} \binom{\frac{1}{2}}{N} 1^{(\frac{1}{2}-N)} (-4z)^N = 1+ \sum_{N>0} \binom{\frac{1}{2}}{N} (-4)^N z^N
+	(a+b)^m =  \sum_{N\ge0} \binom{m}{N} a^{m-N} b^N =  \sum_{N\ge0} \binom{\frac{1}{2}}{N} 1^{(\frac{1}{2}-N)} (-4z)^N = 1+ \sum_{N>0} \binom{\frac{1}{2}}{N} (-4)^N z^N
 \]
 \[
 	zT(z) = -\frac{1}{2}\sum_{N>0} \binom{\frac{1}{2}}{N} (-4)^N z^N
 \]
 Equate coefficients of the polynomials:
 \[
-	\left[ z^N \right] zT(z) = T_{N-1} = \frac{1}{2} \binom{\frac{1}{2}}{N} (-4)^N
+	\left[ z^N \right] zT(z) = T_{N-1} = -\frac{1}{2} \binom{\frac{1}{2}}{N} (-4)^N
 \]
 or
 \[
@@ -147,22 +147,19 @@ By the falling factorial definition of a binomial coefficient,
 \[
 	T_N = -\frac{1}{2} \frac{(\frac{1}{2})(\frac{1}{2}-1)(\frac{1}{2}-2)(\frac{1}{2}-3)\cdots(\frac{1}{2}-N)}{(N+1)!} (-4)^{N+1}
 \]
-where the numerator has $N+1$ factors in the product.  Multiply all but the first of those factor by -2:
+where the numerator has $N+1$ factors in the product. Cancel one of the $-4$'s with the $\frac{1}{2}$ and $-\frac{1}{2}$, leaving $N$ factors in the numerator 
 \[
-	T_N = -\frac{1}{2} \frac{(\frac{1}{2})1 \cdot 3 \cdot 5 \cdots (2N-1)}{(N+1)!} 2^N (-4)
+	T_N = \frac{(\frac{1}{2}-1)(\frac{1}{2}-2)(\frac{1}{2}-3)\cdots(\frac{1}{2}-N)}{(N+1)!} (-4)^{N}
 \]
-Cancel the $-4$ and the $\frac{1}{2}$ and $-\frac{1}{2}$, leaving $N$ factors in the numerator
+Multiply each factor in the numerator by -2:
 \[
-	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1) }{(N+1)!} 2^N
+	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1)}{(N+1)!} 2^N
 \]
-Add in the missing even terms in numerator and denominator:
+Re-write $2^N$ as $\frac{2}{1} \cdot \frac{4}{2} \cdot \frac{6}{3} \cdots \frac{2N}{N}$:
 \[
-	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1) }{(N+1)!} \frac{2 \cdot 4 \cdot 6 \cdots 2N}{2 \cdot 4 \cdot 6 \cdots 2N} 2^N
+	T_N = \frac{1 \cdot 3 \cdot 5 \cdots (2N-1) }{(N+1)!} \frac{2 \cdot 4 \cdot 6 \cdots 2N}{1 \cdot 2 \cdot 3 \cdots N}
 \]
-Cancel the remaining powers of 2:
-\begin{align*}
-	T_N &= \frac{1 \cdot 3 \cdot 5 \cdots (2N-1)}{(N+1)!}  \frac{2 \cdot 4 \cdot 6 \cdots 2N}{1 \cdot 3 \cdot 5 \cdots N} \\
-		&= \frac{1}{N+1} \frac{(2N)!}{N! N!} \\
-		&= \frac{1}{N+1} \binom{2N}{N}
-\end{align*}
+\[
+	T_N = \frac{1}{N+1} \frac{(2N)!}{N! N!} = \frac{1}{N+1} \binom{2N}{N}
+\]
 \end{document}  
